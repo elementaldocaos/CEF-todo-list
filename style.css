@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #1a1a1a; /* Cor de fundo escura para modo noturno */
+    color: #ffffff; /* Cor do texto */
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff; /* Cor do texto */
+}
+
+h2 {
+    color: #ffffff; /* Cor do texto */
+}
+
+#todo-list {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #333333; /* Cor de fundo para a lista */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#todo-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#todo-list li {
+    margin-bottom: 10px;
+}
+
+#todo-list input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+input[type="checkbox"]:checked + label {
+    text-decoration: line-through; /* Tarefa concluída */
+}
+
