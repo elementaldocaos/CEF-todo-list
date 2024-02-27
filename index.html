@@ -183,12 +183,49 @@
         </ul>
     </div>
 
-    <script>
+     <script>
         // Função para marcar todos os itens como concluídos
         function marcarTodosConcluidos() {
             const checkboxes = document.querySelectorAll('#todo-list input[type="checkbox"]');
             checkboxes.forEach(checkbox => checkbox.checked = true);
+            // Salvando as marcações no armazenamento local
+            salvarEstado();
         }
+
+        // Função para salvar o estado das marcações no armazenamento local
+        function salvarEstado() {
+            const checkboxes = document.querySelectorAll('#todo-list input[type="checkbox"]');
+            const estados = {};
+            checkboxes.forEach((checkbox, index) => {
+                estados[`checkbox${index}`] = checkbox.checked;
+            });
+            localStorage.setItem('estadosCheckboxes', JSON.stringify(estados));
+        }
+
+        // Função para carregar o estado das marcações do armazenamento local
+        function carregarEstado() {
+            const estados = JSON.parse(localStorage.getItem('estadosCheckboxes'));
+            if (estados) {
+                Object.keys(estados).forEach(key => {
+                    const checkbox = document.querySelector(`#${key}`);
+                    if (checkbox) {
+                        checkbox.checked = estados[key];
+                    }
+                });
+            }
+        }
+
+        // Carregar estado ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarEstado();
+        });
+
+        // Adicionar evento de alteração para salvar o estado quando as marcações mudarem
+        document.querySelectorAll('#todo-list input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                salvarEstado();
+            });
+        });
     </script>
 </body>
 </html>
