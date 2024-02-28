@@ -192,33 +192,33 @@
             salvarEstado();
         }
 
-        // Função para salvar o estado das marcações no armazenamento local
-    function salvarEstado() {
+     // Função para salvar o estado das marcações no armazenamento local
+function salvarEstado() {
     const checkboxes = document.querySelectorAll('#todo-list input[type="checkbox"]');
     const estados = {};
     checkboxes.forEach((checkbox, index) => {
         estados[`checkbox${index}`] = checkbox.checked;
     });
     localStorage.setItem('estadosCheckboxes', JSON.stringify(estados));
-    }
+}
 
 // Função para carregar o estado das marcações do armazenamento local
-    function carregarEstado() {
+function carregarEstado() {
     const estados = JSON.parse(localStorage.getItem('estadosCheckboxes'));
     if (estados) {
         Object.keys(estados).forEach(key => {
-            const checkbox = document.querySelector(`#${key}`);
+            const checkbox = document.querySelector(`#todo-list input[type="checkbox"]:nth-child(${parseInt(key.replace('checkbox', ''), 10) + 1})`);
             if (checkbox) {
                 checkbox.checked = estados[key];
             }
         });
     }
-    }
+}
 
 // Carregar estado ao carregar a página
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     carregarEstado();
-    });
+});
 
 // Adicionar evento de alteração para salvar o estado quando as marcações mudarem
 document.querySelectorAll('#todo-list input[type="checkbox"]').forEach(checkbox => {
@@ -226,6 +226,7 @@ document.querySelectorAll('#todo-list input[type="checkbox"]').forEach(checkbox 
         salvarEstado();
     });
 });
+
 
     </script>
 </body>
